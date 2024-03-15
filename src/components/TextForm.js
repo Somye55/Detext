@@ -1,59 +1,48 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
+import { motion } from "framer-motion";
+import ButtonGroup from './ButtonGroup';
+import { Transition } from './Transition';
 
 
 export default function TextForm(props) {
-  const [Text,NewText] = useState('')
-  const toUpCase = ()=>{
-      NewText(Text.toUpperCase())
-      props.ShowAlert('Converted to Uppercase','success')
-   }
-  const toLoCase = ()=>{
-      NewText(Text.toLowerCase())
-      props.ShowAlert('Converted to Lower Case','success')
-   }
-   const Onichan=(event)=>{
-       NewText(event.target.value)
-   }
-   const Clear=()=>{
-     NewText('')  
-     props.ShowAlert('Text Cleared','success')   
-   }
-   const Space=()=>{
-     NewText(Text.split(/[ ]+/).join(' '))  
-     props.ShowAlert('Extra spaces removed','success')   
-   }
-   
-   const Bold=()=>{
-    const regex = /[A-Z/0-9/a-z/]/g
-    const strin = Text.match(regex).join('')
-    NewText(strin)
-    props.ShowAlert('Removed symbols and whitespaces','success')
+  const [formText, newFormText] = useState('');
+  const [filteredData, setFilteredData] = useState('');
 
-   }
- 
+  const updateFormText = (state) => {
+    newFormText(state);
+  }
+  const handleText = (event) => {
+    const inputText = event.target.value;
+    if (inputText.length <= 6000) {
+      newFormText(inputText);
+    }
+  }
+  const handleFilteredData = (event) => {
+    setFilteredData(event.target.value);
+  }
+
   return (
-    <div>
-        <div className={`container my-3 bg-${props.mode} text-${props.mode==='light'?'dark':'light'}`}>
-            <h1 className='text-primary font-family-Helvetica Neue'>TEXT UTILITY TOOLS</h1>
-<div className="mb-3">
-<label htmlFor="textArea" className="form-label">Try these amazing text editing tools!</label>
-<textarea className="form-control text-secondary" id="exampleFormControlTextarea1" onChange={Onichan} value={Text} placeholder="Enter text here!" rows="8"></textarea>
-<button onClick={toUpCase} disabled={Text.length===0} className="btn btn-success my-2">Convert to Upper Case</button>
-<button onClick={toLoCase} disabled={Text.length===0} className="btn btn-success my-2 mx-2">Convert to Lower Case</button>
-<button onClick={Clear} disabled={Text.length===0} className="btn btn-success my-2 mx-2">Reset</button>
-<button onClick={Bold} disabled={Text.length===0} className="btn btn-success my-2 mx-2">Remove whitespaces and symbols</button>
-<button onClick={Space} disabled={Text.length===0} className="btn btn-success my-2 mx-2">Remove extra whitespaces</button>
-<p className='mb-2 mx-1'>{Text.length} characters and {Text.split(' ').filter((char)=>{return char.length!==0}).length} words</p>
-</div>
-
-
-
-
-      
-    </div>
-  
-
-    </div>
+    <motion.div
+      className={`container-fluid text-center p-0 ${props.mode === 'light' ? 'bg-white' : 'bg-dark text-white'}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div >
+        <div className={`container-fluid my-3  text-${props.text}`}>
+          <div className="mb-3">
+            <label htmlFor="textArea" className="form-label">Try these amazing text editing tools!</label>
+            <textarea className={`form-control text-secondary ${props.mode === 'light' ? 'bg-white' : 'bg-dark text-white'}`} id="exampleFormControlTextarea1" onChange={handleText} value={formText} placeholder="Enter text here!" rows="8"></textarea>
+            <div className="d-flex justify-content-between mb-3">
+            <p className='mb-2 mx-1'>{Text.length} characters and {formText.split(' ').filter((char) => { return char.length !== 0 }).length} words</p>
+            <p className='mb-2 mx-1'>{formText.length} / 6000 characters</p>
+          </div>
+          </div>
+        </div>
+      </div>
+      <ButtonGroup textData = {formText} triggerTextUpdate = {updateFormText} triggerFilteredData = {setFilteredData}/>
+      <textarea className={`form-control text-secondary ${props.mode === 'light' ? 'bg-white' : 'bg-dark text-white'}`} onChange={handleFilteredData} value={filteredData}  rows="4" disabled style={{resize:'none'}}></textarea>
+    </motion.div>
   )
 }
-

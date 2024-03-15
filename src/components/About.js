@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from "framer-motion";
 
 export default function About(props) {
     // const [myStyle,darkStyle] = useState({backgroundColor: 'white',
@@ -30,6 +31,13 @@ export default function About(props) {
     
 
   return (
+    <motion.div
+    className="container text-center"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.5 }}
+  >
     
     <div className="container my-4 ">
       <div className='accordion' id="accordionExample">
@@ -41,7 +49,7 @@ export default function About(props) {
     </h2>
     <div id="collapseOne" className="accordion-collapse collapse show"  aria-labelledby="headingOne" data-bs-parent="#accordionExample">
       <div className={`accordion-body bg-${props.mode} text-${props.mode==='light'?'dark':'light'}`} >
-        The best thing about these online editors is that they help users to produce an error-free result within a few seconds.Every file or document submission must have a time limit.And if you’re a student or a researcher, you have to submit essays and other academic documents on time.
+        The best thing about these online editors is that they help users to produce an error-free result within a few seconds. Every file or document submission must have a time limit. And if you’re a student or a researcher, you have to submit essays and other academic documents on time.
       </div>
     </div>
   </div>
@@ -71,5 +79,7 @@ export default function About(props) {
   </div>
 </div>
  </div>
+ </motion.div>
   )
+
   }
