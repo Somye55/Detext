@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from "framer-motion";
 import ButtonGroup from './ButtonGroup';
-import { Transition } from './Transition';
-
 
 export default function TextForm(props) {
   const [formText, newFormText] = useState('');
@@ -23,17 +21,17 @@ export default function TextForm(props) {
 
   return (
     <motion.div
-      className={`container-fluid text-center p-0 ${props.mode === 'light' ? 'bg-white' : 'bg-dark text-white'}`}
+      className={`container-fluid text-center p-5 ${props.mode === 'light' ? 'bg-white' : 'bg-dark text-white'}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
       <div >
-        <div className={`container-fluid my-3  text-${props.text}`}>
+        <div className={`container-fluid my-3 text-${props.text}`}>
           <div className="mb-3">
-            <label htmlFor="textArea" className="form-label">Try these amazing text editing tools!</label>
-            <textarea className={`form-control text-secondary ${props.mode === 'light' ? 'bg-white' : 'bg-dark text-white'}`} id="exampleFormControlTextarea1" onChange={handleText} value={formText} placeholder="Enter text here!" rows="8"></textarea>
+            <label htmlFor="textArea" className="form-label text-muted fs-4 fw-bold p-2">Unleash your creativity with these outstanding text editing tools! They’re nothing short of amazing.</label>
+            <textarea className={`form-control text-secondary ${props.mode === 'light' ? 'bg-white border-primary' : 'bg-dark text-white border-primary'}`} id="exampleFormControlTextarea1" onChange={handleText} value={formText} placeholder="Enter text here!" rows="8"></textarea>
             <div className="d-flex justify-content-between mb-3">
             <p className='mb-2 mx-1'>{Text.length} characters and {formText.split(' ').filter((char) => { return char.length !== 0 }).length} words</p>
             <p className='mb-2 mx-1'>{formText.length} / 6000 characters</p>

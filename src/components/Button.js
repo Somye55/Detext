@@ -7,7 +7,7 @@ const Button = ({icon, tooltip, onClick}) => {
                 className="btn my-2 mx-2" 
                 data-bs-toggle="tooltip" 
                 title={tooltip} 
-                onClick={onClick} // Attach the onClick prop
+                onClick={onClick} 
                 style={{backgroundColor:`#00b386`}}
             >
                 <img src={icon} alt="" className="icon-size" style={{width:'20px', height:'20px', objectFit:'cover'}}/>  

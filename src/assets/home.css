@@ -1,0 +1,41 @@
+
+.typing-effect {
+
+    font-family: 'Roboto Mono', monospace;
+    font-size: 5em;
+    text-align: center;
+   }
+   /* Base font size for larger screens */
+.typing-effect {
+  font-size: 5em;
+}
+
+/* Smaller font size for medium screens */
+@media (max-width: 1200px) {
+  .typing-effect {
+      font-size: 4em;
+  }
+}
+
+/* Even smaller font size for small screens */
+@media (max-width: 768px) {
+  .typing-effect {
+      font-size: 3em;
+  }
+}
+
+/* Smallest font size for extra small screens */
+@media (max-width: 576px) {
+  .typing-effect {
+      font-size: 2em;
+  }
+}
+   @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+   }
+   
+   @keyframes blink-caret {
+    from, to { border-color: transparent; }
+     50% { border-color: orange; }
+   }
